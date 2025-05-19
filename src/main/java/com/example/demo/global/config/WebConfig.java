@@ -1,5 +1,6 @@
 package com.example.demo.global.config;
 
+import com.example.demo.global.auth.jwt.JwtAuthFilter;
 import com.example.demo.global.common.enums.UserRole;
 import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +26,7 @@ public class WebConfig {
 
     private static final String[] WHITE_LIST = {"/users/signup", "/admins/signup", "/auth/login", "auth/refresh"};
 
+    private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final AuthenticationEntryPoint authEntryPoint;
     private final AccessDeniedHandler accessDeniedHandler;
@@ -43,7 +46,8 @@ public class WebConfig {
                         .authenticationEntryPoint(authEntryPoint)
                         .accessDeniedHandler(accessDeniedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider);
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
