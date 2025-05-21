@@ -6,4 +6,6 @@ public final class TokenConstants {
     private TokenConstants() {}
 
     public static final String REFRESH_TOKEN_KEY = "refreshToken:";
+    public static final String BLACKLIST_KEY = "blackList:";
+    public static final String BLACKLIST_VALUE = "blacklisted";
 }
