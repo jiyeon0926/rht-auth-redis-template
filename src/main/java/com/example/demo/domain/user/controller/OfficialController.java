@@ -1,8 +1,8 @@
 package com.example.demo.domain.user.controller;
 
-import com.example.demo.domain.user.dto.SignupReqDto;
-import com.example.demo.domain.user.dto.SignupResDto;
-import com.example.demo.domain.user.service.AdminService;
+import com.example.demo.domain.user.dto.UserSignupReqDto;
+import com.example.demo.domain.user.dto.UserSignupResDto;
+import com.example.demo.domain.user.service.OfficialService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/admins")
 @RequiredArgsConstructor
-public class AdminController {
+public class OfficialController {
 
-    private final AdminService adminService;
+    private final OfficialService officialService;
 
     @PostMapping("/signup")
-    public ResponseEntity<SignupResDto> adminSignup(@Valid @RequestBody SignupReqDto signupReqDto) {
-        SignupResDto adminSignup = adminService.adminSignup(signupReqDto.getEmail(), signupReqDto.getPassword(), signupReqDto.getName());
+    public ResponseEntity<UserSignupResDto> adminSignup(@Valid @RequestBody UserSignupReqDto userSignupReqDto) {
+        UserSignupResDto adminSignup = officialService.adminSignup(userSignupReqDto.getEmail(), userSignupReqDto.getPassword(), userSignupReqDto.getName());
 
         return new ResponseEntity<>(adminSignup, HttpStatus.CREATED);
     }

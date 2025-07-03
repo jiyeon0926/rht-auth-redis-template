@@ -1,6 +1,6 @@
 package com.example.demo.domain.user.service;
 
-import com.example.demo.domain.user.dto.SignupResDto;
+import com.example.demo.domain.user.dto.UserSignupResDto;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class UserService {
 
     // 일반 사용자 회원가입
     @Transactional
-    public SignupResDto userSignup(String email, String password, String name) {
+    public UserSignupResDto userSignup(String email, String password, String name) {
         userRepository.findByEmail(email)
                 .ifPresent(user -> {
                     throw new ResponseStatusException(HttpStatus.CONFLICT, "이미 존재하는 이메일입니다.");
@@ -30,7 +30,7 @@ public class UserService {
         User user = new User(email, encodedPassword, name);
         User savedUser = userRepository.save(user);
 
-        return new SignupResDto(
+        return new UserSignupResDto(
                 savedUser.getId(),
                 savedUser.getEmail(),
                 savedUser.getName(),

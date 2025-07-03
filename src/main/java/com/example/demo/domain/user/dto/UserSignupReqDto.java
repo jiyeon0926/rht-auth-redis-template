@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 
 @Getter
-public class SignupReqDto {
+public class UserSignupReqDto {
 
     @NotBlank(message = "email은 필수 항목 입니다.")
     @Email(message = "이메일 형식이 아닙니다.")
@@ -23,9 +23,9 @@ public class SignupReqDto {
     private final String name;
 
     @JsonCreator
-    public SignupReqDto(@JsonProperty("email") String email,
-                        @JsonProperty("password") String password,
-                        @JsonProperty("name") String name) {
+    public UserSignupReqDto(@JsonProperty("email") String email,
+                            @JsonProperty("password") String password,
+                            @JsonProperty("name") String name) {
         this.email = email;
         this.password = password;
         this.name = name;

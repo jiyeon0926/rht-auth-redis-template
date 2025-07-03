@@ -1,6 +1,6 @@
 package com.example.demo.domain.user.service;
 
-import com.example.demo.domain.user.dto.SignupResDto;
+import com.example.demo.domain.user.dto.UserSignupResDto;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,14 +12,14 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
-public class AdminService {
+public class OfficialService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     // 관리자 회원가입
     @Transactional
-    public SignupResDto adminSignup(String email, String password, String name) {
+    public UserSignupResDto adminSignup(String email, String password, String name) {
         userRepository.findByEmail(email)
                 .ifPresent(admin -> {
                     throw new ResponseStatusException(HttpStatus.CONFLICT, "이미 존재하는 이메일입니다.");
@@ -30,7 +30,7 @@ public class AdminService {
         User admin = new User(email, encodedPassword, name);
         User savedAdmin = userRepository.save(admin);
 
-        return new SignupResDto(
+        return new UserSignupResDto(
                 savedAdmin.getId(),
                 savedAdmin.getEmail(),
                 savedAdmin.getName(),

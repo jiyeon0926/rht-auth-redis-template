@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @RequiredArgsConstructor
-public class SignupResDto {
+public class UserSignupResDto {
 
     private final Long id;
     private final String email;
