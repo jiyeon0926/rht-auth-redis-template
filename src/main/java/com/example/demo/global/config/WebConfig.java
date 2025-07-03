@@ -1,7 +1,6 @@
 package com.example.demo.global.config;
 
 import com.example.demo.global.auth.jwt.JwtAuthFilter;
-import com.example.demo.global.common.enums.UserRole;
 import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -39,8 +38,7 @@ public class WebConfig {
                         auth.requestMatchers(WHITE_LIST).permitAll()
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                 .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE, DispatcherType.ERROR).permitAll()
-                                .requestMatchers("/admins/**").hasRole(UserRole.ADMIN.name())
-                                .requestMatchers("/users/**").hasRole(UserRole.USER.name())
+//                                .requestMatchers("/admins/**").hasRole(UserRole.ADMIN.name())
                                 .anyRequest().authenticated())
                 .exceptionHandling(handler -> handler
                         .authenticationEntryPoint(authEntryPoint)

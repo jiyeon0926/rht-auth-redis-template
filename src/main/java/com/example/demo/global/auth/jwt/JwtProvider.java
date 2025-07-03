@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Function;
 
 @Component
@@ -113,7 +114,7 @@ public class JwtProvider {
                 .subject(email)
                 .issuedAt(currentDate)
                 .expiration(expireDate)
-                .claim("role", user.getRole())
+                .claim("role", List.of())
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)), Jwts.SIG.HS256)
                 .compact();
     }

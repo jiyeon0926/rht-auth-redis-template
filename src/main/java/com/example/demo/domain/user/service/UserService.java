@@ -3,7 +3,6 @@ package com.example.demo.domain.user.service;
 import com.example.demo.domain.user.dto.SignupResDto;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.domain.user.repository.UserRepository;
-import com.example.demo.global.common.enums.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,14 +27,13 @@ public class UserService {
 
         String encodedPassword = passwordEncoder.encode(password);
 
-        User user = new User(email, encodedPassword, name, UserRole.USER.name());
+        User user = new User(email, encodedPassword, name);
         User savedUser = userRepository.save(user);
 
         return new SignupResDto(
                 savedUser.getId(),
                 savedUser.getEmail(),
                 savedUser.getName(),
-                savedUser.getRole().name(),
                 savedUser.getCreateAt(),
                 savedUser.getUpdateAt()
         );

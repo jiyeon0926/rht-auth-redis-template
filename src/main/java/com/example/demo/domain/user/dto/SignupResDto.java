@@ -12,7 +12,6 @@ public class SignupResDto {
     private final Long id;
     private final String email;
     private final String name;
-    private final String role;
     private final LocalDateTime createAt;
     private final LocalDateTime updateAt;
 }

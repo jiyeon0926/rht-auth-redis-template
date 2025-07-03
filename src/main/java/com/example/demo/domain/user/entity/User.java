@@ -1,7 +1,6 @@
 package com.example.demo.domain.user.entity;
 
 import com.example.demo.global.common.entity.BaseEntity;
-import com.example.demo.global.common.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,14 +23,9 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 10)
     private String name;
 
-    @Column(nullable = false, length = 10)
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
-
-    public User(String email, String password, String name, String role) {
+    public User(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.role = UserRole.of(role);
     }
 }
